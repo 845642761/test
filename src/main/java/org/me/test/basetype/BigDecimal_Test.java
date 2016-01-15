@@ -9,9 +9,11 @@ public class BigDecimal_Test {
 	 */
 	public static void main(String[] args) {
 		BigDecimal_Test bt = new BigDecimal_Test();
-		BigDecimal source = new BigDecimal("1.01");
-		BigDecimal target = new BigDecimal("1.01");
+		BigDecimal source = new BigDecimal("-5.07");
+		BigDecimal target = new BigDecimal("-1.01");
 		System.out.println(bt.isEqules(source, target));
+		
+		System.out.println(source.abs());
 	}
 	
 	/**
@@ -29,4 +31,14 @@ public class BigDecimal_Test {
 		return false;
 	}
 
+	/**
+	 * 减法运算
+	 * @param source
+	 * @param target
+	 * @author: chengbo
+	 * @date: 2016年1月6日 11:13:50
+	 */
+	public BigDecimal cut(BigDecimal source,BigDecimal target) {
+		return source.subtract(target);
+	}
 }

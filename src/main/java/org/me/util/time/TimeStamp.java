@@ -1,4 +1,4 @@
-package org.me.test.time;
+package org.me.util.time;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -16,8 +16,12 @@ public class TimeStamp {
 		//Date date = ts.StringToDate("2015-12-18 15:00:00");//1450422000000
 		//Date date = ts.StringToDate("2015-12-18 16:00:00");//1450425600000
 		//Date date = ts.StringToDate("2015-12-18 21:00:00");//1450443600000
-		Date date = ts.StringToDate("2000-01-01 00:00:00");//946656000000
-		System.out.println(date.getTime());
+		//Date date = ts.StringToDate("2000-01-01 00:00:00");//946656000000
+		//System.out.println(date.getTime());
+		//System.out.println(ts.DateFormat(ts.getAppointedHoursLater(5, new Date())));
+		//System.out.println(ts.StringToDate("2016-01-11 14:37:04").getTime());//1452494224000
+		//System.out.println(ts.StringToDate("2016-01-11 14:45:23").getTime());//1452494723000
+		System.out.println(ts.StringToDate("2016-01-11 14:44:01").getTime());//1452494641000
 	}
 	
 	/**
@@ -52,5 +56,38 @@ public class TimeStamp {
 			e.printStackTrace();
 		}
 		return null;
+	}
+	
+	/**
+	 * 获取指定时间后x天后的日期
+	 * @param: day 指定x天
+	 * @param: now 现在时间
+	 * @author: chengbo
+	 * @date: 2016年1月5日 10:18:26
+	 */
+	public Date getAppointedDaysLater(int day,Date now) {
+		return new Date(now.getTime()+day*24*60*60*1000L);
+	}
+	
+	/**
+	 * 获取指定时间后x小时后的日期
+	 * @param: hours 指定x小时
+	 * @param: now 现在时间
+	 * @author: chengbo
+	 * @date: 2016年1月5日 10:31:46
+	 */
+	public Date getAppointedHoursLater(int hours,Date now) {
+		return new Date(now.getTime()+hours*60*60*1000L);
+	}
+	
+	/**
+	 * 获取指定时间后x天后的日期
+	 * @param: minutes 指定x分钟
+	 * @param: now 现在时间
+	 * @author: chengbo
+	 * @date: 2016年1月5日 10:29:02
+	 */
+	public Date getAppointedMinutesLater(int minutes,Date now) {
+		return new Date(now.getTime()+minutes*60*1000L);
 	}
 }
