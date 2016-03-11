@@ -21,7 +21,6 @@ import org.apache.http.entity.InputStreamEntity;
 import org.apache.http.impl.client.BasicCookieStore;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
-import org.apache.http.impl.cookie.BasicClientCookie;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 
@@ -64,13 +63,15 @@ public class HttpClientUtil {
 	 * @date: 2016年1月19日 12:06:30
 	 */
 	public String doPostExecute(HashMap<String, String> hm,String uri) {
-		if(hm == null || uri == null)
+		if(uri == null)
 			return null;
 		List<NameValuePair> nvps = new ArrayList<NameValuePair>();
-		for (Entry<String, String> entry : hm.entrySet()) {
-			String key = entry.getKey();
-			String value = entry.getValue();
-			nvps.add(new BasicNameValuePair(key, value));
+		if(hm != null){
+			for (Entry<String, String> entry : hm.entrySet()) {
+				String key = entry.getKey();
+				String value = entry.getValue();
+				nvps.add(new BasicNameValuePair(key, value));
+			}
 		}
 		HttpPost httpPost = new HttpPost(uri);
 		String content = null;
@@ -102,19 +103,20 @@ public class HttpClientUtil {
 	 * @date: 2016年1月20日 18:03:43
 	 */
 	public String doPostExecute(HashMap<String, String> hm,String uri,HashMap<String, String> header) {
-		/*if(hm == null || uri == null)
-			return null;*/
+		if(uri == null)
+			return null;
 		List<NameValuePair> nvps = new ArrayList<NameValuePair>();
-		for (Entry<String, String> entry : hm.entrySet()) {
-			String key = entry.getKey();
-			String value = entry.getValue();
-			nvps.add(new BasicNameValuePair(key, value));
+		if(hm != null){
+			for (Entry<String, String> entry : hm.entrySet()) {
+				String key = entry.getKey();
+				String value = entry.getValue();
+				nvps.add(new BasicNameValuePair(key, value));
+			}
 		}
 		HttpPost httpPost = new HttpPost(uri);
 		String content = null;
 		httpPost.setEntity(new UrlEncodedFormEntity(nvps,Consts.UTF_8));
 		CookieStore cookieStore = new BasicCookieStore();
-		setCookieStore(cookieStore);
 		CloseableHttpClient httpclient = HttpClients.custom().setDefaultCookieStore(cookieStore).build();
 		try {
 			CloseableHttpResponse response = httpclient.execute(httpPost);
@@ -145,7 +147,6 @@ public class HttpClientUtil {
 		HttpPost httpPost = new HttpPost(uri);
 		String content = null;
 		String wsdlRequestData = makeWSDLXML(hm, methodName, nameSpace);
-		System.out.println(wsdlRequestData);
 		byte[] bytes = null;
 		try {
 			bytes = wsdlRequestData.getBytes("UTF-8");
@@ -215,13 +216,5 @@ public class HttpClientUtil {
 		sb.append("</soapenv:Body>\n");
 		sb.append("</soapenv:Envelope>");
 		return sb.toString();
-	}
-	
-	private void setCookieStore(CookieStore cookieStore) {
-		BasicClientCookie cookie = new BasicClientCookie("JSESSIONID", "6A7AA8EF206E068A44F910CA15249E89");
-		cookie.setVersion(0);
-		cookie.setDomain("127.0.0.1");
-		cookie.setPath("/CwlProClient");
-		cookieStore.addCookie(cookie);
 	}
 }
