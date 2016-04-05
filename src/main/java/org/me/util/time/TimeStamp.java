@@ -21,7 +21,9 @@ public class TimeStamp {
 		//System.out.println(ts.DateFormat(ts.getAppointedHoursLater(5, new Date())));
 		//System.out.println(ts.StringToDate("2016-01-11 14:37:04").getTime());//1452494224000
 		//System.out.println(ts.StringToDate("2016-01-11 14:45:23").getTime());//1452494723000
-		System.out.println(ts.StringToDate("2016-01-11 14:44:01").getTime());//1452494641000
+		//System.out.println(ts.StringToDate("2016-01-11 14:44:01").getTime());//1452494641000
+		System.out.println(ts.StringToDate("2016-03-16 11:00:00").getTime());//1458097200000
+		System.out.println(ts.StringToDate("2016-03-16 14:00:00").getTime());//1458108000000
 	}
 	
 	/**
